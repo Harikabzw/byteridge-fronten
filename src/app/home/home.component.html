@@ -1,9 +1,38 @@
-﻿<h1>Hi {{currentUser.firstName}}!</h1>
-<p>You're logged in with Angular 7!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+﻿
+
+<!-- nav -->
+{{currentUser.role}}
+
+
+
+
+
+<!-- main app container -->
+
+<div class="wrapper">
+    <!-- <div class="app-sidebar" data-active-color="white" data-background-color="black" data-image="assets/img/sidebar-bg/01.jpg" style="width:278px"> -->
+        
+        <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+            <div class="navbar-nav" >
+                <a class="nav-item nav-link text-white" routerLink="dashboard">Dashboard</a>
+                <a class="nav-item nav-link text-white" routerLink="audits" *ngIf="currentUser.role=='Auditor'">Audits</a>
+                <a class="nav-item nav-link pull-right"  style="margin-left:70rem" (click)="logout()"><i class="fa fa-sign-out fa-align-right" aria-hidden="true" style="color: #ffffff;float:right;font-size: 30px;" ></i>
+                </a>
+               
+            </div>
+        </nav>
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="content-wrapper" style="margin-top:70px;">
+                <div class="container-fluid" >
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+   
+    <!-- <app-customizer></app-customizer> -->
+</div>
+
+<!-- credits -->

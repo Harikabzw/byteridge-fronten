@@ -1,0 +1,34 @@
+<table class="table table-striped" *ngIf="currentUser.role=='Auditor'||currentUser.role=='auditor'">
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>username</th>
+        <th>Last Login</th>
+        <th>Last Logout</th>
+        <th>Role</th>
+        <th>Client IP</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of audits"> 
+        <td>{{user.firstName}} </td>
+        <td>{{user.lastName}} </td>
+        <td>{{user.username}} </td>
+        <td>{{user.lastLoginTime?user.lastLoginTime:"--"}}</td>
+        <td>{{user.lastLogoutTime?user.lastLogoutTime:"--"}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.clientIp?user.clientIp:"--"}}</td>
+        <td (click)="deleteUser(user.id)"><i class="fa fa-trash-o" style="font-size: 20px;color:#ef4048" aria-hidden="true"></i>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+  <div *ngIf="currentUser.role=='Auditor'||currentUser.role=='auditor'">
+    <p-paginator [rows]="6" [first]="first" (onPageChange)="setPage($event)" [totalRecords]="auditsCount" pageLinkSize="3" [rowsPerPageOptions]="[10,20,30]"></p-paginator>
+
+  </div>
+<div *ngIf="currentUser.role!='Auditor'||currentUser.role!='auditor'"><p  class="text-center"
+  style="color: #ef4048;font-size: 25px;">Unautorized access</p></div>
